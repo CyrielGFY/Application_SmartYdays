@@ -1,12 +1,12 @@
-// App.js
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 
-import React from 'react'
-import Search from './Components/Search'
-
-export default class App extends React.Component {
-    render() {
-        return (
-            <Search/>
-        )
-    }
+export default class HelloWorldApp extends Component {
+  render() {
+    return (
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <Text>Bienvenue sur l'application SmartyDays</Text>
+        </View>
+    );
+  }
 }
