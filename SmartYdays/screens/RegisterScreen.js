@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Header } from 'react-native-elements';
-import { Left, Right, Icon } from 'native-base';
 
-class RegisterPage extends Component {
+class RegisterScreen extends Component {
+
+    static navigationOptions = {
+        header: null
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Header
-                    backgroundColor={'#6610f2'}
-                    leftComponent={<Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />}
-                />
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Register Page</Text>  
                 </View>
@@ -20,7 +19,8 @@ class RegisterPage extends Component {
 }
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: "#8e44ad"
     }
 });
-export default RegisterPage;
+export default RegisterScreen;
