@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { View, SafeAreaView, ScrollView, Dimensions, Image } from 'react-native';
+import { 
+  View, 
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  Image 
+  } from 'react-native';
 import { SocialIcon } from 'react-native-elements'
-import { createAppContainer, createSwitchNavigator} from 'react-navigation';
-import { createDrawerNavigator, DrawerItems} from 'react-navigation-drawer';
+import { 
+  createAppContainer,
+  createSwitchNavigator
+  } from 'react-navigation';
+import { 
+  createDrawerNavigator,
+  DrawerItems
+  } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from '../screens/HomeScreen';
-import ContactScreen from '../screens/ContactScreen';
-import FeaturesScreen from '../screens/FeaturesScreen';
-import ProjectScreen from '../screens/ProjectScreen';
-import PasswordResetScreen from '../screens/PasswordResetScreen';
-import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
+
+import HomeScreen from '../screens/main_screens/HomeScreen';
+import ContactScreen from '../screens/main_screens/ContactScreen';
+import FeaturesScreen from '../screens/main_screens/FeaturesScreen';
+import ProjectScreen from '../screens/main_screens/ProjectScreen';
+import PasswordResetScreen from '../screens/auth_screens/PasswordResetScreen';
+import LoginScreen from '../screens/auth_screens/LoginScreen';
+import RegisterScreen from '../screens/auth_screens/RegisterScreen';
 
 const { width } = Dimensions.get("window"); 
 
@@ -78,21 +91,24 @@ const HomeDrawerNavigator = createDrawerNavigator({
     drawerToggleRoute: 'DrawerToggle',
     drawerWidth: (width / 3) * 2,
     initialRouteName :'Home'
-});
+  });
 
 const LoginStack = createStackNavigator(
   { 
     LoginScreen:{screen:LoginScreen}, 
     PasswordResetScreen:{screen:PasswordResetScreen},
   }
-  );
+);
 
 const AuthNavigator = createStackNavigator(
   { 
     LoginStack:{screen:LoginStack}, 
     RegisterScreen:{screen:RegisterScreen}, 
+  },
+  {
+    headerMode: 'none'
   }
-  );
+);
 
 const RootSwitch = createSwitchNavigator(
   { 
@@ -101,6 +117,7 @@ const RootSwitch = createSwitchNavigator(
   },
   {
     initialRouteName : 'HomeNavigator'
-  });
+  }
+);
 
 export default createAppContainer(RootSwitch);

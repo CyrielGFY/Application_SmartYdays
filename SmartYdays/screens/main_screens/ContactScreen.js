@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
-import ScreenHeader from '../components/Header';
+import ScreenHeader from '../../components/Header';
 
-class FeaturesScreen extends Component {
+class ContactScreen extends Component {
     static navigationOptions = {
         drawerIcon: ({ tintColor }) => (
-            <Icon name="bulb" style={{ fontSize: 24, color: tintColor }} />
+            <Icon name="chatbubbles" style={{ fontSize: 24, color: tintColor }} />
         )
-    }   
+    }
     render() {
         return (
             <View style={styles.container}>
-                <ScreenHeader headerName='Fonctionnalités' onPressEvent = {this.props.navigation.openDrawer} myNavigation = {this.props.navigation}/>
+                <ScreenHeader headerName='Contact' onPressEvent = {this.props.navigation.openDrawer} myNavigation = {this.props.navigation}/>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Features Page</Text>
+                    <Text>Contact Page</Text>
                 </View>
             </View>
         );
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
         flex: 1
     }
 });
-export default FeaturesScreen;
+export default ContactScreen;
