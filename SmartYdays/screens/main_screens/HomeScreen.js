@@ -5,11 +5,13 @@ import ScreenHeader from '../../components/Header';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class HomeScreen extends Component {
+
     static navigationOptions = {
         drawerIcon: ({ tintColor }) => (
             <Icon name="home" style={{ fontSize: 24, color: tintColor }} />        
         )
     }
+    
     render() {
         return (
             <View style={styles.container}>
@@ -35,9 +37,11 @@ class HomeScreen extends Component {
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1
         }
 });
+
 export default HomeScreen;

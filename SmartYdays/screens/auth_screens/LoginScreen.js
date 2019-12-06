@@ -7,7 +7,7 @@ import {
     Text, 
     StyleSheet, 
     TouchableOpacity, 
-    KeyboardAvoidingView    
+    KeyboardAvoidingView
 } from 'react-native';
 
 import GlobalVariables from '../../utils/GlobalVariables'
@@ -40,16 +40,21 @@ class LoginScreen extends Component {
                 body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
-                })
+                }),
+            },
+            console.log(this.state.username, this.state.password)
+            )
+            .then((response) => {    
+                if(!response.ok) throw new Error(response.status);
+                else return response.json();
             })
-            .then((response) => response.json())
             .then((responseData) => {
                 this._onValueChange(STORAGE_KEY, responseData.id_token)
                 this.props.navigation.navigate("Home")
                 GlobalVariables.ISCONNECTED = true
             })
-            .catch((error) => {
-                console.error(error)})
+            .catch((error) => { 
+                console.log(error)})
             .done();
     }
 
@@ -78,7 +83,7 @@ class LoginScreen extends Component {
                             returnKeyType="next"
                             keyboardType="email-address"
                             onSubmitEditing={()=> this.passwordInput.focus()}
-                            onChangeText={(text) => this.state.username}
+                            onChangeText={ username => this.setState({username})}
                             style={styles.input}
                         />    
                         <TextInput 
@@ -87,7 +92,7 @@ class LoginScreen extends Component {
                             secureTextEntry 
                             returnKeyType="go"
                             style={styles.input}
-                            onChangeText={(text) => this.state.password}
+                            onChangeText={ password => this.setState({password})}
                             ref={(input) => this.passwordInput = input}
                         />
                         <CheckBox 
