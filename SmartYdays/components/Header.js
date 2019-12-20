@@ -22,6 +22,7 @@ class MainHeader extends Component{
      */
     render() {
         const { headerName, onPressEvent, myNavigation} = this.props;
+
         if(GlobalVariables.ISCONNECTED)
         {
             return(
@@ -36,7 +37,7 @@ class MainHeader extends Component{
                                             switch(GlobalVariables.ISCONNECTED)
                                             {
                                                 case true:
-                                                    this.props.myNavigation.navigate("ProfileScreen")
+                                                    this.props.myNavigation.navigate("DisconnectScreen")
                                                     break
                                                 case false:
                                                     this.props.myNavigation.navigate("LoginScreen")
@@ -60,7 +61,7 @@ class MainHeader extends Component{
                                             switch(GlobalVariables.ISCONNECTED)
                                             {
                                                 case true:
-                                                    this.props.myNavigation.navigate("ProfileScreen");
+                                                    this.props.myNavigation.navigate("DisconnectScreen");
                                                     break;
                                                 case false:
                                                     this.props.myNavigation.navigate("LoginScreen");
@@ -71,6 +72,7 @@ class MainHeader extends Component{
                 />
             );
         }
+
     }
 }
 

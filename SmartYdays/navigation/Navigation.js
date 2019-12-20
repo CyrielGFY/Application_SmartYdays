@@ -25,20 +25,20 @@ import ProjectScreen from '../screens/main_screens/ProjectScreen';
 import PasswordResetScreen from '../screens/auth_screens/PasswordResetScreen';
 import LoginScreen from '../screens/auth_screens/LoginScreen';
 import RegisterScreen from '../screens/auth_screens/RegisterScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import DisconnectScreen from '../screens/auth_screens/DisconnectScreen';
+const { width } = Dimensions.get("window");
 
-const { width } = Dimensions.get("window"); 
 
 
 
 const CustomDrawerNavigation = (props) => {
   return (
-  <SafeAreaView style={{ flex: 1 }}>  
+  <SafeAreaView style={{ flex: 1 }}>
     <View style={{ backgroundColor: '#6f42c1'}}>
       <View style={{ height: 160, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
         <Image source={require('../assets/smartydays-black-t.png')} style={{ }} />
       </View>
-    </View> 
+    </View>
     <ScrollView>
       <DrawerItems {...props} />
     </ScrollView>
@@ -99,17 +99,18 @@ const HomeDrawerNavigator = createDrawerNavigator({
   });
 
 const LoginStack = createStackNavigator(
+
   { 
     LoginScreen:{
       screen:LoginScreen,
     }, 
     PasswordResetScreen:{screen:PasswordResetScreen},
+    DisconnectScreen:{screen:DisconnectScreen}
   },
   {
     header: null
   }
 );
-
 const AuthNavigator = createBottomTabNavigator(
   { 
     LoginStack:{

@@ -36,6 +36,7 @@ class LoginScreen extends Component {
      * @memberof LoginScreen
      */
     _userLogin() {
+
             //se connecte à l'adresse IP et fait un post    
             fetch("http://10.13.1.215:80/login_check", {
                 method: "POST",
