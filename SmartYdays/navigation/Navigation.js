@@ -32,7 +32,7 @@ const CustomDrawerNavigation = (props) => {
   <SafeAreaView style={{ flex: 1 }}>  
     <View style={{ backgroundColor: '#6f42c1'}}>
       <View style={{ height: 160, backgroundColor: 'Green', alignItems: 'center', justifyContent: 'center' }}>
-        <Image source={require('../assets/smartydays-black-t.png')} style={{ height: 53, width: 48}} />
+        <Image source={require('../assets/smartydays-black-t.png')} style={{ }} />
       </View>
     </View> 
     <ScrollView>
