@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
-import ScreenHeader from '../../components/Header';
+import { Icon, Button } from 'native-base';
+import MainHeader from '../../components/Header';
 import GlobalVariables from '../../utils/GlobalVariables';
 
 class ProjectScreen extends Component {
@@ -11,24 +11,9 @@ class ProjectScreen extends Component {
         )
     }
     render() {
-        if(!GlobalVariables.ISCONNECTED)
-        {
-            return(
-                <View style={styles.container}>
-                <ScreenHeader 
-                    headerName='Proposer un projet' 
-                    onPressEvent = {this.props.navigation.openDrawer} 
-                    myNavigation = {this.props.navigation}                        
-                />
-                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Connectez vous pour proposer un projet</Text>
-                </View>
-            </View>
-            );
-        } else {
             return (
                 <View style={styles.container}>
-                    <ScreenHeader 
+                    <MainHeader 
                         headerName='Proposer un projet' 
                         onPressEvent = {this.props.navigation.openDrawer} 
                         myNavigation = {this.props.navigation}                        
@@ -38,7 +23,6 @@ class ProjectScreen extends Component {
                     </View>
                 </View>
             );
-        }
     }
 }
 const styles = StyleSheet.create({

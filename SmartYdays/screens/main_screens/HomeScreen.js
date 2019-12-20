@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text ,View, StyleSheet} from 'react-native';
 import { Icon } from 'native-base';
-import ScreenHeader from '../../components/Header';
+import MainHeader from '../../components/Header';
 import { ScrollView } from 'react-native-gesture-handler';
 
 class HomeScreen extends Component {
@@ -15,7 +15,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScreenHeader 
+                <MainHeader 
                     headerName='Accueil' 
                     onPressEvent = {this.props.navigation.openDrawer} 
                     myNavigation = {this.props.navigation}                    
