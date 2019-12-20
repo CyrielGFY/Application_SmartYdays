@@ -8,11 +8,8 @@ import {
     Text, 
     StyleSheet, 
     TouchableOpacity, 
-    KeyboardAvoidingView,
-    Platform
+    KeyboardAvoidingView
 } from 'react-native';
-
-import { Icon } from 'native-base';
 
 import GlobalVariables from '../../utils/GlobalVariables'
 
@@ -61,9 +58,9 @@ class LoginScreen extends Component {
             })
             //Recupere les données (token)
             .then((responseData) => {
-                this._onValueChange(STORAGE_KEY, responseData.token);
+                this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.token);
                 console.log(responseData.token);
-                Toast.showSuccess('Connected');
+                Toast.showSuccess('Connecté');
                 GlobalVariables.ISCONNECTED = true
                 console.log(GlobalVariables.ISCONNECTED)
                 //Navigue vers la page d'accueil

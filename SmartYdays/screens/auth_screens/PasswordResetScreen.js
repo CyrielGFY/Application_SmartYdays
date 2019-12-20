@@ -11,7 +11,7 @@ class PasswordResetScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>¨Password Reset Screen</Text>  
+                    <Text>Password Reset Screen</Text>  
                 </View>
             </View>
         );

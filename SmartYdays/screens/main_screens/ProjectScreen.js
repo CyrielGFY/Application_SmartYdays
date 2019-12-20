@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 import MainHeader from '../../components/Header';
 import GlobalVariables from '../../utils/GlobalVariables';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class ProjectScreen extends Component {
     static navigationOptions = {
@@ -21,7 +22,9 @@ class ProjectScreen extends Component {
                     myNavigation = {this.props.navigation}                        
                 />
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Connectez vous pour proposer un projet</Text>
+                    <TouchableOpacity>
+                        <Text onPressEvent={()=>this.props.navigation.navigate("LoginScreen")}>Connectez vous pour proposer un projet</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             );
