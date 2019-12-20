@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SmartYdays",
-    "slug": "SmartYdays",
+    "name": "SmartYDays",
+    "slug": "SmartYDays",
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": [
@@ -11,11 +11,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#6f67de"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
