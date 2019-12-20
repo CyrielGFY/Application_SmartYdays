@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Toast from 'react-native-tiny-toast';
 import {
     AsyncStorage,
     Image, 
@@ -21,13 +22,14 @@ class LoginScreen extends Component {
 
     static navigationOptions = {
         header: null
-    }
+    };
+
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             username: null,
             password: null,
-         }
+        }
     }
 
     /**
@@ -59,16 +61,9 @@ class LoginScreen extends Component {
             })
             //Recupere les données (token)
             .then((responseData) => {
-                //Charge la valeur du token dans la variable globale
-                if(Platform.OS == "android")
-                {
-                    this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.id_token)
-                }
-                else if (Platform.OS =="ios")
-                {
-                    this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.token)
-                }
-                //Indique que l'utilisateur est connecté et le log
+                this._onValueChange(STORAGE_KEY, responseData.token);
+                console.log(responseData.token);
+                Toast.showSuccess('Connected');
                 GlobalVariables.ISCONNECTED = true
                 console.log(GlobalVariables.ISCONNECTED)
                 //Navigue vers la page d'accueil
@@ -77,6 +72,7 @@ class LoginScreen extends Component {
             //Si erreur on la log
             .catch((error) => { 
                 console.log(error)})
+
             .done();
     }
 
@@ -89,7 +85,7 @@ class LoginScreen extends Component {
      */
     async _onValueChange(item, selectedValue) {
         try {
-          await AsyncStorage.setItem(item, selectedValue);
+          await AsyncStorage.setItem(item, JSON.stringify(selectedValue));
         } catch (error) {
           console.log('AsyncStorage error: ' + error.message);
         }
@@ -114,6 +110,7 @@ class LoginScreen extends Component {
                 </View>
                 <KeyboardAvoidingView behavior="padding">
                     <View>
+            <Text style={styles.text}>{'Connectez vous avec les identifiants fournis par l\'administration'}</Text>
                         <TextInput 
                             placeholder="Adresse Email" 
                             placeholderTextColor="#000" 
@@ -159,10 +156,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#9b59b6",
     },
+    text: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+    },
     logoContainer: {
         alignItems: 'center',
         flexGrow: 1,
         justifyContent: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        paddingLeft : 10,
+        paddingRight : 10,
     },
     logo: {
         width: 100,
@@ -177,14 +183,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#000',
         paddingHorizontal: 10,
-        borderRadius: 50
+        borderRadius: 40
     },
     buttonContainer: {
         marginHorizontal: 30,
         marginBottom: 20,
         backgroundColor: "#8e44ad",
         paddingVertical: 15,
-        borderRadius: 50
+        borderRadius: 40
     },
     buttonText: {
         textAlign: 'center',
@@ -195,7 +201,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         marginBottom: 20,
         paddingHorizontal: 10,
-        borderRadius: 50        
+        borderRadius: 40
     }
 });
   
