@@ -17,7 +17,7 @@ import {
   } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
+import ProfileScreen from "../screens/ProfileScreen";
 import HomeScreen from '../screens/main_screens/HomeScreen';
 import ContactScreen from '../screens/main_screens/ContactScreen';
 import FeaturesScreen from '../screens/main_screens/FeaturesScreen';
