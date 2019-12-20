@@ -31,7 +31,7 @@ class LoginScreen extends Component {
     }
 
     _userLogin() {
-          fetch("http://10.13.7.104:80/login_check", {
+          fetch("http://10.13.1.215:80/login_check", {
                 method: "POST",
                 headers: {
                 'Accept': 'application/json',

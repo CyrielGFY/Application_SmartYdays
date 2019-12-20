@@ -20,9 +20,14 @@ class ScreenHeader extends Component{
                                     onPress={()=> {
                                         switch(GlobalVariables.ISCONNECTED)
                                         {
+                                            case true:
+                                                this.props.myNavigation.navigate("DisconnectScreen");
+                                                break;
                                             case false:
-                                                this.props.myNavigation.navigate("LoginScreen")};
+                                                this.props.myNavigation.navigate("LoginScreen");
+                                                break;
                                         }
+                                    }
                                 }/>}
             />
         );
