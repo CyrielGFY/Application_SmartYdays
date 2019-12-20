@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Toast from 'react-native-tiny-toast';
 import {
     AsyncStorage,
     Image, 
@@ -51,11 +52,13 @@ class LoginScreen extends Component {
             .then((responseData) => {
                 this._onValueChange(STORAGE_KEY, responseData.token);
                 console.log(responseData.token);
+                Toast.showSuccess('Connected');
                 this.props.navigation.navigate("Home");
                 GlobalVariables.ISCONNECTED = true
             })
             .catch((error) => { 
                 console.log(error)})
+
             .done();
     }
 
