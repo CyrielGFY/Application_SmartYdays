@@ -22,13 +22,6 @@ class LoginScreen extends Component {
     static navigationOptions = {
         header: null
     }
-
-     *Creates an instance of LoginScreen.
-     * @param {*} props
-     * @memberof LoginScreen
-     * @var username nom d'utilisateur
-     * @var password mot de passe
-     */
     constructor(props){
         super(props)
         this.state = {
