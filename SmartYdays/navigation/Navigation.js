@@ -16,6 +16,7 @@ import {
   DrawerItems
   } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import HomeScreen from '../screens/main_screens/HomeScreen';
 import ContactScreen from '../screens/main_screens/ContactScreen';
@@ -24,8 +25,11 @@ import ProjectScreen from '../screens/main_screens/ProjectScreen';
 import PasswordResetScreen from '../screens/auth_screens/PasswordResetScreen';
 import LoginScreen from '../screens/auth_screens/LoginScreen';
 import RegisterScreen from '../screens/auth_screens/RegisterScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const { width } = Dimensions.get("window"); 
+
+
 
 const CustomDrawerNavigation = (props) => {
   return (
@@ -53,6 +57,7 @@ const CustomDrawerNavigation = (props) => {
   </SafeAreaView>
   );
 }
+
 
 const HomeDrawerNavigator = createDrawerNavigator({
   Home: {
@@ -95,18 +100,38 @@ const HomeDrawerNavigator = createDrawerNavigator({
 
 const LoginStack = createStackNavigator(
   { 
-    LoginScreen:{screen:LoginScreen}, 
+    LoginScreen:{
+      screen:LoginScreen,
+    }, 
     PasswordResetScreen:{screen:PasswordResetScreen},
+  },
+  {
+    header: null
   }
 );
 
-const AuthNavigator = createStackNavigator(
+const AuthNavigator = createBottomTabNavigator(
   { 
-    LoginStack:{screen:LoginStack}, 
-    RegisterScreen:{screen:RegisterScreen}, 
+    LoginStack:{
+      screen:LoginStack,
+      navigationOptions: {
+        title: "Connexion"
+      }  
+    }, 
+    RegisterScreen:{
+      screen:RegisterScreen, 
+      navigationOptions: {
+        title: "Inscription"
+      }},  
   },
   {
     headerMode: 'none'
+  }
+);
+
+const ProfileNavigator = createStackNavigator(
+  {
+    ProfileScreen:{screen:ProfileScreen}
   }
 );
 
@@ -114,6 +139,7 @@ const RootSwitch = createSwitchNavigator(
   { 
     AuthNavigator:{screen:AuthNavigator}, 
     HomeNavigator:{screen:HomeDrawerNavigator},
+    ProfileNavigator:{screen:ProfileNavigator},
   },
   {
     initialRouteName : 'HomeNavigator'

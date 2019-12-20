@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { Header, Avatar } from 'react-native-elements';
 import { Icon } from 'native-base';
-import RegisterOverlay from './RegisterOverlay';
 import GlobalVariables from '../utils/GlobalVariables';
 
-class ScreenHeader extends Component{
+class MainHeader extends Component{
+    
+    /**
+     * Creates an instance of ScreenHeader.
+     * @param {*} props
+     * @memberof ScreenHeader
+     */
     constructor(props){
         super(props)
       }
+    
+    /**
+     * Retourne le header
+     *
+     * @returns
+     * @memberof ScreenHeader
+     */
     render() {
         const { headerName, onPressEvent, myNavigation} = this.props;
         return(
@@ -18,15 +30,21 @@ class ScreenHeader extends Component{
                 rightComponent={<Avatar 
                                     rounded icon={{name: 'user', type: 'font-awesome'}} 
                                     onPress={()=> {
+                                        console.log(GlobalVariables.ISCONNECTED)
                                         switch(GlobalVariables.ISCONNECTED)
                                         {
+                                            case true:
+                                                this.props.myNavigation.navigate("ProfileScreen")
+                                                break
                                             case false:
-                                                this.props.myNavigation.navigate("LoginScreen")};
-                                        }
+                                                this.props.myNavigation.navigate("LoginScreen")
+                                                break
+                                        };
+                                    }
                                 }/>}
             />
         );
     }
 }
 
-export default ScreenHeader;
+export default MainHeader;

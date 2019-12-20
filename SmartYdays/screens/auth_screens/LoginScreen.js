@@ -7,14 +7,15 @@ import {
     Text, 
     StyleSheet, 
     TouchableOpacity, 
-    KeyboardAvoidingView
+    KeyboardAvoidingView,
+    Platform
 } from 'react-native';
+
+import { Icon } from 'native-base';
 
 import GlobalVariables from '../../utils/GlobalVariables'
 
 import { CheckBox } from 'react-native-elements'
-
-var STORAGE_KEY = 'id_token';
 
 class LoginScreen extends Component {
 
@@ -22,6 +23,12 @@ class LoginScreen extends Component {
         header: null
     }
 
+     *Creates an instance of LoginScreen.
+     * @param {*} props
+     * @memberof LoginScreen
+     * @var username nom d'utilisateur
+     * @var password mot de passe
+     */
     constructor(props){
         super(props)
         this.state = {
@@ -30,34 +37,63 @@ class LoginScreen extends Component {
          }
     }
 
+    /**
+     * Fonction de connection
+     * Récupération du token puis stockage de celui dans une variable globale
+     * @memberof LoginScreen
+     */
     _userLogin() {
-          fetch("http://10.13.7.104:80/login_check", {
+            //se connecte à l'adresse IP et fait un post    
+            fetch("http://10.13.1.215:80/login_check", {
                 method: "POST",
                 headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
                 },
+                //recupère les valeurs des variables et parse en JSON
                 body: JSON.stringify({
                 username: this.state.username,
                 password: this.state.password,
                 }),
             },
+            //Log les username et les mdp
             console.log(this.state.username, this.state.password)
             )
+            //Si la reponse ne retourne pas d'erreur il recupere le token sinon il lance une erreur
             .then((response) => {    
                 if(!response.ok) throw new Error(response.status);
                 else return response.json();
             })
+            //Recupere les données (token)
             .then((responseData) => {
-                this._onValueChange(STORAGE_KEY, responseData.id_token)
-                this.props.navigation.navigate("Home")
+                //Charge la valeur du token dans la variable globale
+                if(Platform.OS == "android")
+                {
+                    this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.id_token)
+                }
+                else if (Platform.OS =="ios")
+                {
+                    this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.token)
+                }
+                //Indique que l'utilisateur est connecté et le log
                 GlobalVariables.ISCONNECTED = true
+                console.log(GlobalVariables.ISCONNECTED)
+                //Navigue vers la page d'accueil
+                this.props.navigation.navigate("Home")
             })
+            //Si erreur on la log
             .catch((error) => { 
                 console.log(error)})
             .done();
     }
 
+    /**
+     * Stocke la valeur dans un storage
+     *
+     * @param {*} item Variable ou sera stocké la valeur
+     * @param {*} selectedValue Valeur à stocker
+     * @memberof LoginScreen
+     */
     async _onValueChange(item, selectedValue) {
         try {
           await AsyncStorage.setItem(item, selectedValue);
@@ -66,14 +102,22 @@ class LoginScreen extends Component {
         }
     }
 
+    /**
+     * Constructeur de la view de LoginScreen
+     * @returns
+     * @memberof LoginScreen
+     */
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
+                    <TouchableOpacity onPress={()=>this.props.navigation.navigate("Home")}>
                     <Image 
                         style={styles.logo} 
                         source={require('../../assets/logo.png')}
                     />
+                    <Text style={{textAlign: "center", color: '#FFF'}}>Accueil</Text>
+                    </TouchableOpacity>
                 </View>
                 <KeyboardAvoidingView behavior="padding">
                     <View>
@@ -110,9 +154,6 @@ class LoginScreen extends Component {
                         <TouchableOpacity style={styles.buttonContainer}>
                             <Text style={styles.buttonText} onPress={()=>this.props.navigation.navigate("PasswordResetScreen")}>Mot de passe oublié</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonContainer}>
-                            <Text style={styles.buttonText} onPress={()=>this.props.navigation.navigate("RegisterScreen")}>Inscription</Text>
-                        </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
             </View>
@@ -131,8 +172,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     logo: {
-        width: 80,
-        height: 80
+        width: 100,
+        height: 100,
+        resizeMode: 'stretch'
+
     },
     input: {
         height: 40,

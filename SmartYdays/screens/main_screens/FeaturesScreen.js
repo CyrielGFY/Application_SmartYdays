@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
-import ScreenHeader from '../../components/Header';
+import MainHeader from '../../components/Header';
 
 class FeaturesScreen extends Component {
     static navigationOptions = {
@@ -12,7 +12,7 @@ class FeaturesScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScreenHeader headerName='Fonctionnalités' onPressEvent = {this.props.navigation.openDrawer} myNavigation = {this.props.navigation}/>
+                <MainHeader headerName='Fonctionnalités' onPressEvent = {this.props.navigation.openDrawer} myNavigation = {this.props.navigation}/>
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Text>Features Page</Text>
                 </View>

@@ -15,6 +15,51 @@ class RegisterScreen extends Component {
         header: null
     }
 
+    _userLogin() {
+        //se connecte à l'adresse IP et fait un post    
+        fetch("http://10.13.1.215:80/public/registerCustomer", {
+            method: "POST",
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            //recupère les valeurs des variables et parse en JSON
+            body: JSON.stringify({
+            username: this.state.username,
+            password: this.state.password,
+            }),
+        },
+        //Log les username et les mdp
+        console.log(this.state.username, this.state.password)
+        )
+        //Si la reponse ne retourne pas d'erreur il recupere le token sinon il lance une erreur
+        .then((response) => {    
+            if(!response.ok) throw new Error(response.status);
+            else return response.json();
+        })
+        //Recupere les données (token)
+        .then((responseData) => {
+            //Charge la valeur du token dans la variable globale
+            if(Platform.OS == "android")
+            {
+                this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.id_token)
+            }
+            else if (Platform.OS =="ios")
+            {
+                this._onValueChange(GlobalVariables.STORAGE_KEY, responseData.token)
+            }
+            //Indique que l'utilisateur est connecté et le log
+            GlobalVariables.ISCONNECTED = true
+            console.log(GlobalVariables.ISCONNECTED)
+            //Navigue vers la page d'accueil
+            this.props.navigation.navigate("Home")
+        })
+        //Si erreur on la log
+        .catch((error) => { 
+            console.log(error)})
+        .done();
+}
+
     render() {
         return (
             <View style={styles.container}>

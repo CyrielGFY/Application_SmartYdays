@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
-import ScreenHeader from '../../components/Header';
+import MainHeader from '../../components/Header';
 import GlobalVariables from '../../utils/GlobalVariables';
 
 class ProjectScreen extends Component {
@@ -15,7 +15,7 @@ class ProjectScreen extends Component {
         {
             return(
                 <View style={styles.container}>
-                <ScreenHeader 
+                <MainHeader 
                     headerName='Proposer un projet' 
                     onPressEvent = {this.props.navigation.openDrawer} 
                     myNavigation = {this.props.navigation}                        
@@ -28,7 +28,7 @@ class ProjectScreen extends Component {
         } else {
             return (
                 <View style={styles.container}>
-                    <ScreenHeader 
+                    <MainHeader 
                         headerName='Proposer un projet' 
                         onPressEvent = {this.props.navigation.openDrawer} 
                         myNavigation = {this.props.navigation}                        
