@@ -20,18 +20,18 @@ class LoginScreen extends Component {
 
     static navigationOptions = {
         header: null
-    }
+    };
 
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             username: null,
             password: null,
-         }
+        }
     }
 
     _userLogin() {
-          fetch("http://10.13.7.104:80/login_check", {
+          fetch("http://10.13.1.215:80/login_check", {
                 method: "POST",
                 headers: {
                 'Accept': 'application/json',
@@ -49,8 +49,9 @@ class LoginScreen extends Component {
                 else return response.json();
             })
             .then((responseData) => {
-                this._onValueChange(STORAGE_KEY, responseData.id_token)
-                this.props.navigation.navigate("Home")
+                this._onValueChange(STORAGE_KEY, responseData.token);
+                console.log(responseData.token);
+                this.props.navigation.navigate("Home");
                 GlobalVariables.ISCONNECTED = true
             })
             .catch((error) => { 
@@ -60,7 +61,7 @@ class LoginScreen extends Component {
 
     async _onValueChange(item, selectedValue) {
         try {
-          await AsyncStorage.setItem(item, selectedValue);
+          await AsyncStorage.setItem(item, JSON.stringify(selectedValue));
         } catch (error) {
           console.log('AsyncStorage error: ' + error.message);
         }
@@ -77,6 +78,7 @@ class LoginScreen extends Component {
                 </View>
                 <KeyboardAvoidingView behavior="padding">
                     <View>
+            <Text style={styles.text}>{'Connectez vous avec les identifiants fournis par l\'administration'}</Text>
                         <TextInput 
                             placeholder="Adresse Email" 
                             placeholderTextColor="#000" 
@@ -125,10 +127,19 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#9b59b6",
     },
+    text: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 20,
+    },
     logoContainer: {
         alignItems: 'center',
         flexGrow: 1,
         justifyContent: 'center',
+        marginLeft: 10,
+        marginRight: 10,
+        paddingLeft : 10,
+        paddingRight : 10,
     },
     logo: {
         width: 80,
@@ -141,14 +152,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: '#000',
         paddingHorizontal: 10,
-        borderRadius: 50
+        borderRadius: 40
     },
     buttonContainer: {
         marginHorizontal: 30,
         marginBottom: 20,
         backgroundColor: "#8e44ad",
         paddingVertical: 15,
-        borderRadius: 50
+        borderRadius: 40
     },
     buttonText: {
         textAlign: 'center',
@@ -159,7 +170,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         marginBottom: 20,
         paddingHorizontal: 10,
-        borderRadius: 50        
+        borderRadius: 40
     }
 });
   
