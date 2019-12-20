@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
-import ScreenHeader from '../../components/Header';
+import MainHeader from '../../components/Header';
 import GlobalVariables from '../../utils/GlobalVariables';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class ProjectScreen extends Component {
     static navigationOptions = {
@@ -15,20 +16,22 @@ class ProjectScreen extends Component {
         {
             return(
                 <View style={styles.container}>
-                <ScreenHeader 
+                <MainHeader 
                     headerName='Proposer un projet' 
                     onPressEvent = {this.props.navigation.openDrawer} 
                     myNavigation = {this.props.navigation}                        
                 />
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text>Connectez vous pour proposer un projet</Text>
+                    <TouchableOpacity>
+                        <Text onPressEvent={()=>this.props.navigation.navigate("LoginScreen")}>Connectez vous pour proposer un projet</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
             );
         } else {
             return (
                 <View style={styles.container}>
-                    <ScreenHeader 
+                    <MainHeader 
                         headerName='Proposer un projet' 
                         onPressEvent = {this.props.navigation.openDrawer} 
                         myNavigation = {this.props.navigation}                        
