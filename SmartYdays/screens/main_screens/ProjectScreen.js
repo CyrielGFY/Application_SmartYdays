@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Icon, Button } from 'native-base';
+import { Icon } from 'native-base';
 import MainHeader from '../../components/Header';
-import GlobalVariables from '../../utils/GlobalVariables';
 
+/**
+ * Page de gestion des projets
+ * @class ProjectScreen
+ * @extends {Component}
+ */
 class ProjectScreen extends Component {
+
+    /**
+     * Ajout de l'icon visible dans le navigateur
+     * @static
+     * @memberof ProjectScreen
+     */
     static navigationOptions = {
         drawerIcon: ({ tintColor }) => (
             <Icon name="clipboard" style={{ fontSize: 24, color: tintColor }} />
         )
     }
+
+    /**
+     * Creation de la page
+     * @returns
+     * @memberof ProjectScreen
+     */
     render() {
             return (
                 <View style={styles.container}>
@@ -25,6 +41,8 @@ class ProjectScreen extends Component {
             );
     }
 }
+
+//Style utilisés
 const styles = StyleSheet.create({
     container: {
         flex: 1

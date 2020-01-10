@@ -11,17 +11,23 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 
+import { LinearGradient } from 'expo-linear-gradient';
+
 import globalVariables from '../../utils/GlobalVariables'
 import globalStyles from '../../components/styles';
 
-import { CheckBox } from 'react-native-elements'
-
 class LoginScreen extends Component {
 
+    //Masque le header du composant de navigation
     static navigationOptions = {
         header: null
     };
 
+    /**
+     *Creation des variables du LoginScreen
+     * @param {*} props
+     * @memberof LoginScreen
+     */
     constructor(props){
         super(props);
         this.state = {
@@ -70,8 +76,9 @@ class LoginScreen extends Component {
             })
             //Si erreur on la log
             .catch((error) => { 
-                console.log(error)})
-
+                console.log(error)
+                Toast.showSuccess('Erreur de connexion, veuillez réessayer');
+            })
             .done();
     }
 
@@ -98,6 +105,7 @@ class LoginScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
+            <LinearGradient start={{x: 0.25, y: 0}} end={{x: 1, y: 0}} colors={['#482288','#382387']} style={styles.container}>
                 <View style={styles.logoContainer}>
                     <TouchableOpacity onPress={()=>this.props.navigation.navigate("Home")}>
                     <Image 
@@ -114,7 +122,7 @@ class LoginScreen extends Component {
                         </Text>
                         <TextInput 
                             placeholder="Adresse Email" 
-                            placeholderTextColor="#000" 
+                            placeholderTextColor="#aaa" 
                             returnKeyType="next"
                             keyboardType="email-address"
                             onSubmitEditing={()=> this.passwordInput.focus()}
@@ -123,70 +131,59 @@ class LoginScreen extends Component {
                         />    
                         <TextInput 
                             placeholder="Mot de passe" 
-                            placeholderTextColor="#000" 
+                            placeholderTextColor="#aaa"
                             secureTextEntry 
                             returnKeyType="go"
                             onChangeText={ password => this.setState({password})}
                             ref={(input) => this.passwordInput = input}
                             style={globalStyles.input}
                         />
-                        <CheckBox 
-                            title='Rester connecté' 
-                            center 
-                            checkedIcon='dot-circle-o' 
-                            uncheckedIcon='circle-o'
-                            containerStyle={styles.checkBoxContainer}
-                        />
                         <TouchableOpacity style={globalStyles.buttonContainer}>
                             <Text style={globalStyles.buttonText} onPress={this._userLogin.bind(this)}>Connexion</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-                        <TouchableOpacity style={globalStyles.buttonContainer}>
-                            <Text style={globalStyles.buttonText} onPress={()=>this.props.navigation.navigate("PasswordResetScreen")}>Mot de passe oublié</Text>
+                        <TouchableOpacity style={globalStyles.buttonPasswordForgot}>
+                            <Text style={styles.buttonPasswordForgotText} onPress={()=>this.props.navigation.navigate("PasswordResetScreen")}>Mot de passe oublié ?</Text>
                         </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
+                </LinearGradient>
             </View>
         );
     }
 }
 
+//Creation de styles
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#9b59b6",
     },
     text: {
+        textAlign: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20,
+        marginLeft: 10,
+        marginRight: 10,
+        paddingLeft : 10,
+        paddingRight : 10, 
+        paddingHorizontal: 10,
+        marginHorizontal: 30,
+        color: '#FFF',
+    },
+    buttonPasswordForgotText: {
+        textAlign: 'center',
+        color: '#fff',
     },
     logoContainer: {
         alignItems: 'center',
         flexGrow: 1,
         justifyContent: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-        paddingLeft : 10,
-        paddingRight : 10,
     },
     logo: {
-        width: 100,
-        height: 100,
+        width: 120,
+        height: 120,
         resizeMode: 'stretch'
-
-    },
-    checkBoxContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 40,
-        marginHorizontal: 30,
-        marginBottom: 20,
-        paddingHorizontal: 10,
-        paddingLeft : 10,
-        paddingRight : 10,
-        borderRadius: 40
     }
 });
   

@@ -9,12 +9,27 @@ import {
     KeyboardAvoidingView
     } from 'react-native';
 
+/**
+ * Ecran d'inscription
+ * @class RegisterScreen
+ * @extends {Component}
+ */
 class RegisterScreen extends Component {
 
+    /**
+     * Masquage du header
+     * @static
+     * @memberof RegisterScreen
+     */
     static navigationOptions = {
         header: null
     }
 
+    /**
+     *Creation de la page
+     * @returns
+     * @memberof RegisterScreen
+     */
     render() {
         return (
             <View style={styles.container}>
@@ -44,6 +59,8 @@ class RegisterScreen extends Component {
         );
     }
 }
+
+//Creation de styles utilisés dans la page
 const styles = StyleSheet.create({
     container: {
         flex: 1,

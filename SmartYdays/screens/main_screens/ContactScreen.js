@@ -5,13 +5,29 @@ import MainHeader from '../../components/Header';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import globalStyles from '../../components/styles'
 
+/**
+ * Page de contact
+ * @class ContactScreen
+ * @extends {Component}
+ */
 class ContactScreen extends Component {
+
+    /**
+     * Ajout de l'icone utilisé dans le navigateur
+     * @static
+     * @memberof ContactScreen
+     */
     static navigationOptions = {
         drawerIcon: ({ tintColor }) => (
             <Icon name="chatbubbles" style={{ fontSize: 24, color: tintColor }} />
         )
     }
 
+    /**
+     *Ceation de variables.
+     * @param {*} props
+     * @memberof ContactScreen
+     */
     constructor(props){
         super(props);
         this.state = {
@@ -20,6 +36,10 @@ class ContactScreen extends Component {
         }
     }
 
+    /**
+     * Fonction qui permet d'envoyer un message avec le mail du contact et son contenu
+     * @memberof ContactScreen
+     */
     _contactPost() {
         //se connecte à l'adresse IP et fait un post    
         fetch("http://10.13.1.215:80/public/contactUs", {
@@ -54,6 +74,11 @@ class ContactScreen extends Component {
         .done();
     }
 
+    /**
+     * Creation de la page
+     * @returns
+     * @memberof ContactScreen
+     */
     render() {
         return (
             <View style={styles.container}>
@@ -84,6 +109,8 @@ class ContactScreen extends Component {
         );
     }
 }
+
+//Styles utilisés dans la page
 const styles = StyleSheet.create({
     container: {
         flex: 1

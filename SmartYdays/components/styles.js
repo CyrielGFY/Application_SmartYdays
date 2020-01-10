@@ -1,29 +1,31 @@
-import React, { Component } from 'react';
 import {StyleSheet} from 'react-native';
 
+//Exporte des styles utilisés dans tout le projet
 export default styles = StyleSheet.create({
     buttonContainer: {
         marginHorizontal: 30,
         marginBottom: 20,
-        backgroundColor: "#8e44ad",
+        backgroundColor: "#fff",
         paddingVertical: 15,
         borderRadius: 40,
-        borderColor: '#8e44ff',
-        borderWidth: 2,
+        borderColor: '#000',
+        borderWidth: 1,
+    },
+    buttonPasswordForgot: {
+        marginHorizontal: 30,
+        marginBottom: 20,
     },
     buttonText: {
         textAlign: 'center',
-        color: '#FFFFFF',
+        color: '#000',
     },
     input: {
         height: 40,
         marginHorizontal: 30,
-        backgroundColor: '#FFF',
         marginBottom: 20,
-        color: '#000',
+        color: '#fff',
         paddingHorizontal: 10,
-        borderRadius: 40,
-        borderColor: '#000',
-        borderWidth: 2,
+        borderBottomColor: '#fff',
+        borderBottomWidth: 1,
     },
 })

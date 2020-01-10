@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { Header, Avatar } from 'react-native-elements';
 import { Icon } from 'native-base';
 import GlobalVariables from '../utils/GlobalVariables';
+import { LinearGradient } from 'expo-linear-gradient';
 
+/**
+ * Header des pages appartenant au navigateur "Home"
+ * @class MainHeader
+ * @extends {Component}
+ */
 class MainHeader extends Component{
     
     /**
@@ -15,8 +21,7 @@ class MainHeader extends Component{
       }
     
     /**
-     * Retourne le header
-     *
+     * Retourne le header selon l'état de la connexion (connecté/déconnecté)
      * @returns
      * @memberof ScreenHeader
      */
@@ -26,8 +31,9 @@ class MainHeader extends Component{
         if(GlobalVariables.ISCONNECTED)
         {
             return(
+                <LinearGradient start={{x: 0.25, y: 0}} end={{x: 1, y: 0}} colors={['#482288','#382387']} style={styles.container}>
                 <Header
-                    backgroundColor={'#6f42c1'}                
+                    style={{backgroundColor: 'transparent'}}        
                     leftComponent={<Icon name={'menu'} style={{color: '#FFF'}} onPress={onPressEvent} />}
                     centerComponent={{text: headerName, style:{color: '#FFF'} }}
                     rightComponent={<Avatar 
@@ -46,13 +52,15 @@ class MainHeader extends Component{
                                         }
                                     }/>}
                 />
+                </LinearGradient>
             );
         }
         else
         {
             return(
+                <LinearGradient start={{x: 0.25, y: 0}} end={{x: 1, y: 0}} colors={['#482288','#382387']} style={styles.container}>
                 <Header
-                    backgroundColor={'#6f42c1'}                
+                    backgroundColor={'transparent'}                
                     centerComponent={{text: headerName, style:{color: '#FFF'} }}
                     rightComponent={<Avatar 
                                         rounded icon={{name: 'user', type: 'font-awesome'}} 
@@ -70,6 +78,7 @@ class MainHeader extends Component{
                                         }
                                     }/>}
                 />
+                </LinearGradient>
             );
         }
 
