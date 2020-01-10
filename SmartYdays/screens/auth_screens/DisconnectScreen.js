@@ -1,8 +1,5 @@
 import React,{Component} from "react";
 import {
-    AsyncStorage,
-    Image,
-    TextInput,
     View,
     Text,
     StyleSheet,
@@ -10,7 +7,6 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import GlobalVariables from "../../utils/GlobalVariables";
-import {CheckBox} from "react-native-elements";
 import Toast from 'react-native-tiny-toast'
 
 class DisconnectScreen extends Component {
@@ -23,9 +19,6 @@ class DisconnectScreen extends Component {
         Toast.showSuccess('Deconnecté');
         this.props.navigation.navigate("Home")
     }
-
-
-
 
     render() {
         return (

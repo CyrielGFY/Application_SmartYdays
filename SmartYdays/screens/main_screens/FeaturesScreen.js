@@ -3,12 +3,29 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Icon } from 'native-base';
 import MainHeader from '../../components/Header';
 
+/**
+ * Page des fonctionnalités
+ * @class FeaturesScreen
+ * @extends {Component}
+ */
 class FeaturesScreen extends Component {
+    
+    /**
+     *Ajout de l'icone utilisé dans le navigateur
+     * @static
+     * @memberof FeaturesScreen
+     */
     static navigationOptions = {
         drawerIcon: ({ tintColor }) => (
             <Icon name="bulb" style={{ fontSize: 24, color: tintColor }} />
         )
     }   
+
+    /**
+     * Creation de la page
+     * @returns
+     * @memberof FeaturesScreen
+     */
     render() {
         return (
             <View style={styles.container}>
@@ -20,6 +37,8 @@ class FeaturesScreen extends Component {
         );
     }
 }
+
+//Utilisation de styles
 const styles = StyleSheet.create({
     container: {
         flex: 1

@@ -16,7 +16,6 @@ import {
   DrawerItems
   } from 'react-navigation-drawer';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ProfileScreen from "../screens/ProfileScreen";
 import HomeScreen from '../screens/main_screens/HomeScreen';
 import ContactScreen from '../screens/main_screens/ContactScreen';
@@ -28,9 +27,7 @@ import RegisterScreen from '../screens/auth_screens/RegisterScreen';
 import DisconnectScreen from '../screens/auth_screens/DisconnectScreen';
 const { width } = Dimensions.get("window");
 
-
-
-
+//Creation du navigator principale
 const CustomDrawerNavigation = (props) => {
   return (
   <SafeAreaView style={{ flex: 1 }}>
@@ -58,7 +55,7 @@ const CustomDrawerNavigation = (props) => {
   );
 }
 
-
+//Ajout des différentes pages au navigateur "Home"
 const HomeDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: HomeScreen,
@@ -98,8 +95,8 @@ const HomeDrawerNavigator = createDrawerNavigator({
     initialRouteName :'Home'
   });
 
+//Ajout des différentes pages au navigateur "Login"
 const LoginStack = createStackNavigator(
-
   { 
     LoginScreen:{
       screen:LoginScreen,
@@ -111,7 +108,9 @@ const LoginStack = createStackNavigator(
     header: null
   }
 );
-const AuthNavigator = createBottomTabNavigator(
+
+//Creation du navigateur de connexion contenant la connexion et l'inscription
+const AuthNavigator = createSwitchNavigator(
   { 
     LoginStack:{
       screen:LoginStack,
@@ -126,16 +125,19 @@ const AuthNavigator = createBottomTabNavigator(
       }},  
   },
   {
-    headerMode: 'none'
+    headerMode: 'none',
+    tabBarVisible: 'false'
   }
 );
 
+//Ajout des différentes pages au navigateur "Profile"
 const ProfileNavigator = createStackNavigator(
   {
     ProfileScreen:{screen:ProfileScreen}
   }
 );
 
+//Creation du navigateur de base permettant de naviguer entre chaque navigateurs secondaires
 const RootSwitch = createSwitchNavigator(
   { 
     AuthNavigator:{screen:AuthNavigator}, 
